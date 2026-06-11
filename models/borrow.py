@@ -14,7 +14,6 @@ class BorrowRecord:
         self.return_date = return_date
         self.returned = returned
 
-    # --- Properties (Encapsulation) ---
     @property
     def record_id(self):
         return self.__record_id
@@ -127,7 +126,6 @@ class BorrowManager:
         - books: list of book dicts with 'id' and 'available' fields
         Returns (success: bool, message: str, updated_books: list)
         """
-        # Find the active borrow record for this user and book
         record = next(
             (r for r in self.records
              if r.book_id == book_id and r.username == username and not r.returned),
@@ -136,11 +134,11 @@ class BorrowManager:
         if not record:
             return False, f"No active borrow record found for book '{book_id}' by '{username}'.", books
 
-        # Mark as returned
+        
         record.returned = True
         record.return_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        # Update book availability
+        
         for b in books:
             if b["id"] == book_id:
                 b["available"] = True
