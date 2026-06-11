@@ -7,4 +7,9 @@ class User:
         self.role = role
 
     def hash_password(self,password):
-        return hashlib.sha256(password.encode()).hexdigest()   
+        return hashlib.sha256(password.encode()).hexdigest()
+
+    def verify_password(self,password):
+        return self.password == hashlib.sha256(password.encode()).hexdigest()
+
+        
