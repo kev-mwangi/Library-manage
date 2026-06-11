@@ -40,3 +40,6 @@ def login(username, password):
 
     print("Invalid username or password.")
     return False 
+
+def logout():
+    print("User logged out successfully.")
