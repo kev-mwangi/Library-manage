@@ -9,3 +9,7 @@ def load_users():
             return json.load(file)
     except FileNotFoundError:
         return []
+
+def save_users(users):
+    with open(USERS_FILE, "w") as file:
+        json.dump(users, file, indent=4)
