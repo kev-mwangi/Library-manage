@@ -12,4 +12,9 @@ class User:
     def verify_password(self,password):
         return self.password == hashlib.sha256(password.encode()).hexdigest()
 
-        
+    def to_dict(self):
+        return {
+            "username":self.username,
+            "password":self.password,
+            "role":self.role
+        }
