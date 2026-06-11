@@ -13,3 +13,16 @@ def load_users():
 def save_users(users):
     with open(USERS_FILE, "w") as file:
         json.dump(users, file, indent=4)
+
+def register_user(username, password, role="member"):
+    users = load_users()
+
+    for user in users:
+        if user["username"] == username:
+            print("User already exists!")
+            return
+
+    new_user = User(username, password, role)
+    users.append(new_user.to_dict())
+    save_users(users)
+    print("User registered successfully!")
