@@ -1,5 +1,8 @@
 import json
 from models.user import User
+import hashlib
+
+current_user = None
 
 USERS_FILE = "data/users.json"
 
@@ -28,18 +31,26 @@ def register_user(username, password, role="member"):
     print("User registered successfully!")
 
 def login(username, password):
+    global current_user
     users = load_users()
 
     for user in users:
-        temp_user = User(username, password)
-        temp_user.password = user["password"]
+        if user["username"] == username:
+            hashed = hashlib.sha256(password.encode()).hexdigest()
 
-        if user["username"] == username and temp_user.verify_password(password):
-            print(f"Welcome {username}!")
-            return True
+            if user["password"] == hashed:
+                current_user = user
+                print(f"Welcome {username}!")
+                return True
 
     print("Invalid username or password.")
-    return False 
+    return False
 
 def logout():
-    print("User logged out successfully.")
+    global current_user
+
+    if current_user:
+        print(f"{current_user['username']} logged out.")
+        current_user = None
+    else:
+        print("No user is logged in.")
