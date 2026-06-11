@@ -1,0 +1,9 @@
+[
+    {
+        "name": "Jane Doe ",
+        "reservation_id": "R004",
+        "reservation_date": "2026-08-01",
+        "reservation_time": "1100",
+        "number_of_people": 1
+    }
+]
