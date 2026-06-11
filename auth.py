@@ -26,3 +26,17 @@ def register_user(username, password, role="member"):
     users.append(new_user.to_dict())
     save_users(users)
     print("User registered successfully!")
+
+def login(username, password):
+    users = load_users()
+
+    for user in users:
+        temp_user = User(username, password)
+        temp_user.password = user["password"]
+
+        if user["username"] == username and temp_user.verify_password(password):
+            print(f"Welcome {username}!")
+            return True
+
+    print("Invalid username or password.")
+    return False 
