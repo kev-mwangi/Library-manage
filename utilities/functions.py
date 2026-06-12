@@ -1,5 +1,6 @@
 from models.borrow import BorrowManager
 from auth import register_user, login, logout
+from reservation import Reservation, remove_expired_reservations, load_data, save_data
 
 borrow_manager = BorrowManager()
 
@@ -36,6 +37,43 @@ def all_borrows():
     records = borrow_manager.get_all_records()
 
     print("All borrowed books:")
+
+#create a reservation
+def create_reservation(
+    name,
+    reservation_id,
+    reservation_date,
+    reservation_time,
+    number_of_people
+):
+    reservation = Reservation(
+        name,
+        reservation_id,
+        reservation_date,
+        reservation_time,
+        number_of_people
+    )
+
+    data = load_data()
+    data.append(reservation.to_dict())
+    save_data(data)
+
+    print("Your reservation has been saved successfully.")
+
+def view_reservations():
+    data = load_data()
+
+    if not data:
+        print("No reservations found.")
+    else:
+        print("Your reservations:")
+        for r in data:
+            print("Reservation ")
+            print("ID:", r["reservation_id"])
+            print("Name:", r["name"])
+            print("Date:", r["reservation_date"])
+            print("Time:", r["reservation_time"])
+            print("People:", r["number_of_people"])
 
 #user logout
 def logout_user():
