@@ -20,6 +20,14 @@ def main():
     login_parser.add_argument("--username", required=True)
     login_parser.add_argument("--password", required=True)
 
+    #Book management
+    add_book_parser = subparsers.add_parser("add-book")
+    add_book_parser.add_argument("--id", required=True)
+    add_book_parser.add_argument("--title", required=True)
+    add_book_parser.add_argument("--author", required=True)
+    add_book_parser.add_argument("--year", type=int, required=True)
+    add_book_parser.add_argument("--genre", default="")
+
     # Borrowing a book
     borrow_parser = subparsers.add_parser("borrow", help="Borrow a book")
     borrow_parser.add_argument("--book_id", required=True)
