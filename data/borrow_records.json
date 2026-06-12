@@ -4,7 +4,7 @@
         "book_id": "B001",
         "username": "Wilson",
         "borrow_date": "2026-06-12 14:12:15",
-        "return_date": null,
-        "returned": false
+        "return_date": "2026-06-12 14:23:13",
+        "returned": true
     }
 ]
