@@ -1,8 +1,10 @@
 from models.borrow import BorrowManager
 from auth import register_user, login, logout
 from reservation import Reservation, remove_expired_reservations, load_data, save_data
+from models.book_management import book
 
 borrow_manager = BorrowManager()
+book_manager = book()
 
 #User authentication
 def register(username, password, role):
@@ -38,7 +40,17 @@ def all_borrows():
 
     print("All borrowed books:")
 
-#create a reservation
+#Book management
+def add_book(book_id, title, author, year, genre=""):
+    return book(book_id, title, author, year, genre)
+
+def list_books():
+    return book_manager.list_books()
+
+def delete_book(book_id):
+    return book_manager.delete_book(book_id) 
+
+#Create a reservation
 def create_reservation(
     name,
     reservation_id,
