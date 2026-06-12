@@ -111,7 +111,6 @@ class BorrowManager:
         )
         self.records.append(record)
 
-        # Update book availability
         for b in books:
             if b["id"] == book_id:
                 b["available"] = False

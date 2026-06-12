@@ -66,7 +66,7 @@ while True:
 
     if choice == "1":
         name = input("Enter your name: ")
-        reservation_id = input("Enter reservation ID: ")
+        reservation_id = input("Enter library ID: ")
         reservation_date = input("Enter reservation date (YYYY-MM-DD): ")
         reservation_time = input("Enter reservation time (HH:MM): ")
         number_of_people = int(input("Enter number of people: "))
@@ -93,11 +93,11 @@ while True:
         else:
             for r in data:
                 print("Reservation ")
-                print("ID:", r["reservation_id"])
-                print("Name:", r["name"])
-                print("Date:", r["reservation_date"])
-                print("Time:", r["reservation_time"])
-                print("People:", r["number_of_people"])
+                print("ID:", ["reservation_id"])
+                print("Name:", ["name"])
+                print("Date:", ["reservation_date"])
+                print("Time:", ["reservation_time"])
+                print("People:", ["number_of_people"])
 
     elif choice == "3":
         remove_expired_reservations()
