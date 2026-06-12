@@ -1,5 +1,5 @@
 import json
-from models.user import User
+from user import User
 import hashlib
 
 current_user = None

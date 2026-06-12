@@ -6,36 +6,35 @@ import utilities.functions
 borrow_manager = BorrowManager()
 
 def main():
-    parser = argparse.ArgumentParser(prog="Library Management System")
+    parser = argparse.ArgumentParser(prog="Library Management System", description="A sample CLI library management system.")
 
     subparsers = parser.add_subparsers(dest="user_command")
 
     # Registration
-    register_parser = subparsers.add_parser("register")
+    register_parser = subparsers.add_parser("register", help="Register a new user")
     register_parser.add_argument("--username", required=True)
     register_parser.add_argument("--password", required=True)
 
     # User login
-    login_parser = subparsers.add_parser("login")
+    login_parser = subparsers.add_parser("login", help="Login to the system")
     login_parser.add_argument("--username", required=True)
     login_parser.add_argument("--password", required=True)
 
     # Borrowing a book
-
-    borrow_parser = subparsers.add_parser("borrow")
+    borrow_parser = subparsers.add_parser("borrow", help="Borrow a book")
     borrow_parser.add_argument("--book_id", required=True)
     borrow_parser.add_argument("--username", required=True)
 
     # Returning a book
-    return_parser = subparsers.add_parser("return")
+    return_parser = subparsers.add_parser("return", help="Return a book")
     return_parser.add_argument("--book_id", required=True)
     return_parser.add_argument("--username", required=True)
 
     # View my borrowed books
-    subparsers.add_parser("my_borrows")
+    subparsers.add_parser("my_borrows", help="View your borrowed books")
 
     # View all borrows (librarian only)
-    subparsers.add_parser("all_borrows")
+    subparsers.add_parser("all_borrows", help="View all borrows (librarian only)")
 
     # User logout
     subparsers.add_parser("logout")
@@ -78,3 +77,6 @@ def borrow_book(book_id, username, books):
 
 def return_book(book_id, username, books):
     return borrow_manager.return_book(book_id, username, books)
+
+if __name__ == "__main__":
+    main()
