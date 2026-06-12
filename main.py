@@ -36,6 +36,17 @@ def main():
     # View all borrows (librarian only)
     subparsers.add_parser("all_borrows", help="View all borrows (librarian only)")
 
+    #create a reservation
+    reservation_parser = subparsers.add_parser("reserve", help="Create a reservation")
+    reservation_parser.add_argument("--name", required=True)
+    reservation_parser.add_argument("--reservation_id", required=True)
+    reservation_parser.add_argument("--reservation_date", required=True)
+    reservation_parser.add_argument("--reservation_time", required=True)
+    reservation_parser.add_argument("--number_of_people", type=int, required=True)
+
+    # View reservations
+    subparsers.add_parser("view_reservations", help="View your reservations")
+
     # User logout
     subparsers.add_parser("logout")
 
@@ -63,6 +74,18 @@ def main():
 
     elif args.user_command == "all_borrows":
         utilities.functions.all_borrows()
+
+    elif args.user_command == "reserve":
+        utilities.functions.create_reservation(
+            name=args.name,
+            reservation_id=args.reservation_id,
+            reservation_date=args.reservation_date,
+            reservation_time=args.reservation_time,
+            number_of_people=args.number_of_people
+        )
+
+    elif args.user_command == "view_reservations":
+        utilities.functions.view_reservations()
 
     elif args.user_command == "logout":
         utilities.functions.logout_user()
