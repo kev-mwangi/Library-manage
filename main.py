@@ -1,9 +1,16 @@
 import argparse
-from auth import register_user
+from models.auth import register_user
 from models.borrow import BorrowManager
 import utilities.functions
 
 borrow_manager = BorrowManager()
+
+def borrow_book(book_id, username, books):
+    return borrow_manager.borrow_book(book_id, username, books)
+
+
+def return_book(book_id, username, books):
+    return borrow_manager.return_book(book_id, username, books)
 
 def main():
     parser = argparse.ArgumentParser(prog="Library Management System", description="A sample CLI library management system.")
@@ -60,7 +67,7 @@ def main():
 
     args = parser.parse_args()
 
-    global books
+    books = []
 
     # User commands
     if args.user_command == "register":
@@ -68,6 +75,15 @@ def main():
 
     elif args.user_command == "login":
         utilities.functions.login_user(args.username, args.password)
+
+    elif args.user_command == "add-book":
+        utilities.functions.add_book(
+            args.id,
+            args.title,
+            args.author,
+            args.year,
+            args.genre
+        )
 
     elif args.user_command == "borrow":
         success, msg, books = borrow_book(args.book_id, args.username, books)
@@ -102,12 +118,6 @@ def main():
         parser.print_help()
 
 # These avoid input() inside functions.py and allow us to pass parameters directly from the CLI
-def borrow_book(book_id, username, books):
-    return borrow_manager.borrow_book(book_id, username, books)
-
-
-def return_book(book_id, username, books):
-    return borrow_manager.return_book(book_id, username, books)
 
 if __name__ == "__main__":
     main()
