@@ -1,10 +1,10 @@
 from models.borrow import BorrowManager
-from auth import register_user, login, logout
-from reservation import Reservation, remove_expired_reservations, load_data, save_data
+from models.auth import register_user, login, logout
+from models.reservation import Reservation, remove_expired_reservations, load_data, save_data
 from models.book_management import book
 
 borrow_manager = BorrowManager()
-book_manager = book()
+book_manager = book("title", "author", "year", "genre")
 
 #User authentication
 def register(username, password, role):
